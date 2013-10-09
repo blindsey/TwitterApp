@@ -8,16 +8,16 @@
 
 #import "AppDelegate.h"
 #import "TwitterClient.h"
-#import "TimelineVC.h"
-#import "SignedOutVC.h"
+#import "TimelineViewController.h"
+#import "SignedOutViewController.h"
 
 @interface AppDelegate ()
 
 - (void)updateRootVC;
 
-@property (nonatomic, strong) SignedOutVC *signedOutVC;
-@property (nonatomic, strong) UINavigationController *timelineNVC;
-@property (nonatomic, strong) UIViewController *currentVC;
+@property (nonatomic, strong) SignedOutViewController *signedOutViewController;
+@property (nonatomic, strong) UINavigationController *navigationController;
+@property (nonatomic, strong) UIViewController *currentViewController;
 
 @end
 
@@ -27,7 +27,7 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 
-    self.window.rootViewController = self.currentVC;
+    self.window.rootViewController = self.currentViewController;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateRootVC) name:UserDidLoginNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateRootVC) name:UserDidLogoutNotification object:nil];
@@ -106,33 +106,33 @@
 
 #pragma mark - Private methods
 
-- (UIViewController *)currentVC {
+- (UIViewController *)currentViewController {
     if ([User currentUser]) {
-        return self.timelineNVC;
+        return self.navigationController;
     } else {
-        return self.signedOutVC;
+        return self.signedOutViewController;
     }
 }
 
-- (UINavigationController *)timelineNVC {
-    if (!_timelineNVC) {
-        TimelineVC *timelineVC = [[TimelineVC alloc] init];
-        _timelineNVC = [[UINavigationController alloc] initWithRootViewController:timelineVC];
+- (UINavigationController *)navigationController {
+    if (!_navigationController) {
+        TimelineViewController *timeline = [[TimelineViewController alloc] init];
+        _navigationController = [[UINavigationController alloc] initWithRootViewController:timeline];
     }
     
-    return _timelineNVC;
+    return _navigationController;
 }
 
-- (SignedOutVC *)signedOutVC {
-    if (!_signedOutVC) {
-        _signedOutVC = [[SignedOutVC alloc] init];
+- (SignedOutViewController *)signedOutViewController {
+    if (!_signedOutViewController) {
+        _signedOutViewController = [[SignedOutViewController alloc] init];
     }
     
-    return _signedOutVC;
+    return _signedOutViewController;
 }
 
 - (void)updateRootVC {
-    self.window.rootViewController = self.currentVC;
+    self.window.rootViewController = self.currentViewController;
 }
 
 @end

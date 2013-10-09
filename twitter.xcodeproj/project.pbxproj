@@ -19,10 +19,10 @@
 		42CC894717AF4C6B00B6D34B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42CC892F17AF4C6A00B6D34B /* UIKit.framework */; };
 		42CC894F17AF4C6B00B6D34B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 42CC894D17AF4C6B00B6D34B /* InfoPlist.strings */; };
 		42CC895117AF4C6B00B6D34B /* twitterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 42CC895017AF4C6B00B6D34B /* twitterTests.m */; };
-		42CC895D17AF6FBB00B6D34B /* TimelineVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 42CC895C17AF6FBB00B6D34B /* TimelineVC.m */; };
+		42CC895D17AF6FBB00B6D34B /* TimelineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42CC895C17AF6FBB00B6D34B /* TimelineViewController.m */; };
 		42CC896117AF871500B6D34B /* TwitterClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 42CC896017AF871500B6D34B /* TwitterClient.m */; };
-		42CC89AA17B0C31900B6D34B /* SignedOutVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 42CC89A817B0C31900B6D34B /* SignedOutVC.m */; };
-		42CC89AB17B0C31900B6D34B /* SignedOutVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 42CC89A917B0C31900B6D34B /* SignedOutVC.xib */; };
+		42CC89AA17B0C31900B6D34B /* SignedOutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42CC89A817B0C31900B6D34B /* SignedOutViewController.m */; };
+		42CC89AB17B0C31900B6D34B /* SignedOutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 42CC89A917B0C31900B6D34B /* SignedOutViewController.xib */; };
 		42CC89AE17B0C7A600B6D34B /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 42CC89AD17B0C7A600B6D34B /* User.m */; };
 		42CC89B117B0C7B800B6D34B /* Tweet.m in Sources */ = {isa = PBXBuildFile; fileRef = 42CC89B017B0C7B800B6D34B /* Tweet.m */; };
 		42CC89B417B0D63C00B6D34B /* RestObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 42CC89B317B0D63C00B6D34B /* RestObject.m */; };
@@ -58,13 +58,13 @@
 		42CC894C17AF4C6B00B6D34B /* twitterTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "twitterTests-Info.plist"; sourceTree = "<group>"; };
 		42CC894E17AF4C6B00B6D34B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		42CC895017AF4C6B00B6D34B /* twitterTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = twitterTests.m; sourceTree = "<group>"; };
-		42CC895B17AF6FBB00B6D34B /* TimelineVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimelineVC.h; sourceTree = "<group>"; };
-		42CC895C17AF6FBB00B6D34B /* TimelineVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimelineVC.m; sourceTree = "<group>"; };
+		42CC895B17AF6FBB00B6D34B /* TimelineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimelineViewController.h; sourceTree = "<group>"; };
+		42CC895C17AF6FBB00B6D34B /* TimelineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimelineViewController.m; sourceTree = "<group>"; };
 		42CC895F17AF871500B6D34B /* TwitterClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwitterClient.h; sourceTree = "<group>"; };
 		42CC896017AF871500B6D34B /* TwitterClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwitterClient.m; sourceTree = "<group>"; };
-		42CC89A717B0C31900B6D34B /* SignedOutVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignedOutVC.h; sourceTree = "<group>"; };
-		42CC89A817B0C31900B6D34B /* SignedOutVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignedOutVC.m; sourceTree = "<group>"; };
-		42CC89A917B0C31900B6D34B /* SignedOutVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SignedOutVC.xib; sourceTree = "<group>"; };
+		42CC89A717B0C31900B6D34B /* SignedOutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignedOutViewController.h; sourceTree = "<group>"; };
+		42CC89A817B0C31900B6D34B /* SignedOutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignedOutViewController.m; sourceTree = "<group>"; };
+		42CC89A917B0C31900B6D34B /* SignedOutViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SignedOutViewController.xib; sourceTree = "<group>"; };
 		42CC89AC17B0C7A600B6D34B /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		42CC89AD17B0C7A600B6D34B /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		42CC89AF17B0C7B800B6D34B /* Tweet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tweet.h; sourceTree = "<group>"; };
@@ -144,7 +144,7 @@
 				42CC895E17AF86D600B6D34B /* API */,
 				42CC896217B0BD9100B6D34B /* Models */,
 				42CC89BC17B0EFEE00B6D34B /* Views */,
-				42CC895A17AF525100B6D34B /* View Controllers */,
+				42CC895A17AF525100B6D34B /* Controllers */,
 				42CC89B517B0D7AC00B6D34B /* Utilities */,
 				42CC893A17AF4C6B00B6D34B /* AppDelegate.h */,
 				42CC893B17AF4C6B00B6D34B /* AppDelegate.m */,
@@ -184,16 +184,16 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		42CC895A17AF525100B6D34B /* View Controllers */ = {
+		42CC895A17AF525100B6D34B /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				42CC895B17AF6FBB00B6D34B /* TimelineVC.h */,
-				42CC895C17AF6FBB00B6D34B /* TimelineVC.m */,
-				42CC89A717B0C31900B6D34B /* SignedOutVC.h */,
-				42CC89A817B0C31900B6D34B /* SignedOutVC.m */,
-				42CC89A917B0C31900B6D34B /* SignedOutVC.xib */,
+				42CC895B17AF6FBB00B6D34B /* TimelineViewController.h */,
+				42CC895C17AF6FBB00B6D34B /* TimelineViewController.m */,
+				42CC89A717B0C31900B6D34B /* SignedOutViewController.h */,
+				42CC89A817B0C31900B6D34B /* SignedOutViewController.m */,
+				42CC89A917B0C31900B6D34B /* SignedOutViewController.xib */,
 			);
-			name = "View Controllers";
+			name = Controllers;
 			sourceTree = "<group>";
 		};
 		42CC895E17AF86D600B6D34B /* API */ = {
@@ -322,7 +322,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				42CC89AB17B0C31900B6D34B /* SignedOutVC.xib in Resources */,
+				42CC89AB17B0C31900B6D34B /* SignedOutViewController.xib in Resources */,
 				42CC893617AF4C6A00B6D34B /* InfoPlist.strings in Resources */,
 				42CC893E17AF4C6B00B6D34B /* Images.xcassets in Resources */,
 			);
@@ -375,13 +375,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				42CC89B917B0D7DD00B6D34B /* NSDictionary+CPAdditions.m in Sources */,
-				42CC89AA17B0C31900B6D34B /* SignedOutVC.m in Sources */,
+				42CC89AA17B0C31900B6D34B /* SignedOutViewController.m in Sources */,
 				42CC896117AF871500B6D34B /* TwitterClient.m in Sources */,
 				42CC89BF17B0F02600B6D34B /* TweetCell.m in Sources */,
 				42CC89AE17B0C7A600B6D34B /* User.m in Sources */,
 				42CC89B117B0C7B800B6D34B /* Tweet.m in Sources */,
 				42CC89B417B0D63C00B6D34B /* RestObject.m in Sources */,
-				42CC895D17AF6FBB00B6D34B /* TimelineVC.m in Sources */,
+				42CC895D17AF6FBB00B6D34B /* TimelineViewController.m in Sources */,
 				42CC893C17AF4C6B00B6D34B /* AppDelegate.m in Sources */,
 				42CC893817AF4C6B00B6D34B /* main.m in Sources */,
 			);

@@ -6,17 +6,17 @@
 //  Copyright (c) 2013 codepath. All rights reserved.
 //
 
-#import "SignedOutVC.h"
+#import "SignedOutViewController.h"
 #import "TwitterClient.h"
 
-@interface SignedOutVC ()
+@interface SignedOutViewController ()
 
 - (IBAction)onSignInButton:(id)sender;
 - (void)onError;
 
 @end
 
-@implementation SignedOutVC
+@implementation SignedOutViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {

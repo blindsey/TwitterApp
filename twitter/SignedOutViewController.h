@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SignedOutVC : UIViewController
+@interface SignedOutViewController : UIViewController
 
 @end

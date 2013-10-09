@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 codepath. All rights reserved.
 //
 
-#import "TimelineVC.h"
+#import "TimelineViewController.h"
 
-@interface TimelineVC ()
+@interface TimelineViewController ()
 
 @property (nonatomic, strong) NSMutableArray *tweets;
 
@@ -17,7 +17,7 @@
 
 @end
 
-@implementation TimelineVC
+@implementation TimelineViewController
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
