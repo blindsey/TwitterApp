@@ -16,4 +16,12 @@ extern NSString *const UserDidLogoutNotification;
 + (User *)currentUser;
 + (void)setCurrentUser:(User *)currentUser;
 
+@property (nonatomic, strong, readonly) NSString *name;
+@property (nonatomic, strong, readonly) NSString *screenName;
+@property (nonatomic, strong, readonly) NSString *profileImageURL;
+
+@property (nonatomic, assign, readonly) NSInteger statusesCount;
+@property (nonatomic, assign, readonly) NSInteger followersCount;
+@property (nonatomic, assign, readonly) NSInteger friendsCount;
+
 @end

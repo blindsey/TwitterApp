@@ -7,12 +7,16 @@
 //
 
 #import "TimelineViewController.h"
+#import "TweetCell.h"
+#import "TweetViewController.h"
 
 @interface TimelineViewController ()
 
-@property (nonatomic, strong) NSMutableArray *tweets;
+@property (nonatomic, strong) NSMutableArray *tweets; // of Tweets
+@property (nonatomic, strong) TweetViewController *tweetViewController;
 
 - (void)onSignOutButton;
+- (void)onComposeButton;
 - (void)reload;
 
 @end
@@ -23,7 +27,12 @@
 {
     self = [super initWithStyle:style];
     if (self) {
-        self.title = @"Twitter";
+        self.title = @""; // since we don't want navigation text
+        
+        UIImage *image = [UIImage imageNamed:@"twitter.png"];
+        UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
+        [imageView setContentMode:UIViewContentModeScaleAspectFit];
+        self.navigationItem.titleView = imageView;
         
         [self reload];
     }
@@ -34,13 +43,9 @@
 {
     [super viewDidLoad];
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Sign Out" style:UIBarButtonItemStylePlain target:self action:@selector(onSignOutButton)];
-
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Sign Out" style:UIBarButtonItemStylePlain target:self action:@selector(onSignOutButton)];
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"compose.png"] style:UIBarButtonItemStylePlain target:self action:@selector(onComposeButton)];
 }
 
 - (void)didReceiveMemoryWarning
@@ -63,82 +68,50 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
-//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+    static NSString *identifier = @"TweetCell";
+    NSArray *nib = [[NSBundle mainBundle] loadNibNamed:identifier owner:self options:nil];
+    TweetCell *cell = [nib objectAtIndex:0];
 
     Tweet *tweet = self.tweets[indexPath.row];
-    cell.textLabel.text = tweet.text;
-    
+    cell.tweet = tweet;
     return cell;
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+    return 70; // TODO: this needs to be dynamic
 }
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    
+    Tweet *tweet = self.tweets[indexPath.row];
+    self.tweetViewController.tweet = tweet;
+    [self.navigationController pushViewController:self.tweetViewController animated:YES];
 }
-
-/*
-#pragma mark - Navigation
-
-// In a story board-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-
- */
 
 #pragma mark - Private methods
+
+- (TweetViewController *)tweetViewController
+{
+    if (!_tweetViewController) {
+        _tweetViewController = [[TweetViewController alloc] initWithNibName:@"TweetViewController" bundle:nil];
+    }
+    return _tweetViewController;
+}
 
 - (void)onSignOutButton {
     [User setCurrentUser:nil];
 }
 
+- (void)onComposeButton {
+}
+
 - (void)reload {
     [[TwitterClient instance] homeTimelineWithCount:20 sinceId:0 maxId:0 success:^(AFHTTPRequestOperation *operation, id response) {
-        NSLog(@"%@", response);
+        //NSLog(@"%@", response);
         self.tweets = [Tweet tweetsWithArray:response];
         [self.tableView reloadData];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
