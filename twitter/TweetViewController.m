@@ -56,10 +56,9 @@
     self.imageView.layer.masksToBounds = YES;
 
     self.nameLabel.text = user.name;
-    self.usernameLabel.text = user.screenName;
+    self.usernameLabel.text = [NSString stringWithFormat:@"@%@", user.screenName];
 
     self.tweetLabel.text = self.tweet.text;
-    [self.tweetLabel sizeToFit];
 
     static NSDateFormatter *formatter = nil; //cached
     if (formatter == nil) {
@@ -70,6 +69,11 @@
     self.timeLabel.text = [formatter stringFromDate:self.tweet.createdAt];
 
     [self attributedStringForStatsLabel];
+}
+
+- (void)viewDidLayoutSubviews
+{
+    [self.tweetLabel sizeToFit]; // might have to worry about overflow
 }
 
 - (IBAction)doReply {
@@ -88,7 +92,7 @@
                       self.tweet.retweetCount, self.tweet.favoriteCount];
     NSMutableAttributedString *mas = [[NSMutableAttributedString alloc] initWithString:text];
   
-    UIFont *font = [UIFont boldSystemFontOfSize:17.0];
+    UIFont *font = [UIFont boldSystemFontOfSize:15.0];
     UIColor *color = [UIColor blackColor];
     NSRange range = NSMakeRange(0, [text length]);
     [mas addAttributes:@{ NSForegroundColorAttributeName : color, NSFontAttributeName : font } range:range];

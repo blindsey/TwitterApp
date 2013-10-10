@@ -28,13 +28,6 @@
     self = [super initWithStyle:style];
     if (self) {
         self.title = @""; // since we don't want navigation text
-        
-        UIImage *image = [UIImage imageNamed:@"twitter.png"];
-        UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
-        [imageView setContentMode:UIViewContentModeScaleAspectFit];
-        self.navigationItem.titleView = imageView;
-        
-        [self reload];
     }
     return self;
 }
@@ -46,6 +39,22 @@
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Sign Out" style:UIBarButtonItemStylePlain target:self action:@selector(onSignOutButton)];
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"compose.png"] style:UIBarButtonItemStylePlain target:self action:@selector(onComposeButton)];
+
+    UIImage *image = [UIImage imageNamed:@"twitter.png"];
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
+    [imageView setContentMode:UIViewContentModeScaleAspectFit];
+    self.navigationItem.titleView = imageView;
+    
+    UINavigationBar *bar = [self.navigationController navigationBar];
+    [bar setTranslucent:NO];
+    [bar setTintColor:[UIColor whiteColor]];
+    [bar setBarTintColor:[UIColor colorWithRed:85.0/255 green:172.0/255 blue:238.0/255 alpha:1.0]];
+
+    NSDictionary *attributes = @{ UITextAttributeTextColor : [UIColor whiteColor],
+                                       UITextAttributeFont : [UIFont boldSystemFontOfSize:20] };
+    [bar setTitleTextAttributes:attributes];
+
+    [self reload];
 }
 
 - (void)didReceiveMemoryWarning
