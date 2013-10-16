@@ -16,8 +16,17 @@
 @property (weak, nonatomic) IBOutlet UILabel *tweetLabel;
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *statsLabel;
+@property (weak, nonatomic) IBOutlet UIButton *favoriteButton;
+@property (weak, nonatomic) IBOutlet UIButton *retweetButton;
 
 - (void)attributedStringForStatsLabel;
+
+- (void)onComposeButton;
+- (IBAction)onReplyButton;
+- (IBAction)onRetweetButton;
+- (IBAction)onFavoriteButton;
+
+- (void)onError:(NSError *)error;
 
 @end
 
@@ -36,7 +45,10 @@
 {
     [super viewDidLoad];
 
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"compose.png"] style:UIBarButtonItemStylePlain target:self action:@selector(onComposeButton)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"compose"] style:UIBarButtonItemStylePlain target:self action:@selector(onComposeButton)];
+
+    [self.retweetButton setImage:[UIImage imageNamed:@"retweeted"] forState:UIControlStateSelected|UIControlStateDisabled];
+    [self.favoriteButton setImage:[UIImage imageNamed:@"favorited"] forState:UIControlStateSelected];
 }
 
 - (void)didReceiveMemoryWarning
@@ -69,42 +81,96 @@
     self.timeLabel.text = [formatter stringFromDate:self.tweet.createdAt];
 
     [self attributedStringForStatsLabel];
+
+    self.retweetButton.enabled = !self.tweet.retweeted;
+    self.retweetButton.selected = self.tweet.retweeted;
+    self.favoriteButton.selected = self.tweet.favorited;
 }
 
 - (void)viewDidLayoutSubviews
 {
-    [self.tweetLabel sizeToFit]; // might have to worry about overflow
-}
-
-- (IBAction)doReply {
-}
-
-- (IBAction)doRetweet {
-}
-
-- (IBAction)doFavorite {
+    [self.tweetLabel sizeToFit]; // need to handle overflow
 }
 
 # pragma mark - Private methods
+
 - (void)attributedStringForStatsLabel
 {
     NSString *text = [NSString stringWithFormat:@"%d RETWEETS  %d FAVORITES",
                       self.tweet.retweetCount, self.tweet.favoriteCount];
     NSMutableAttributedString *mas = [[NSMutableAttributedString alloc] initWithString:text];
-  
+
     UIFont *font = [UIFont boldSystemFontOfSize:15.0];
     UIColor *color = [UIColor blackColor];
     NSRange range = NSMakeRange(0, [text length]);
     [mas addAttributes:@{ NSForegroundColorAttributeName : color, NSFontAttributeName : font } range:range];
-    
+
     UIFont *regularFont = [UIFont systemFontOfSize:[font pointSize] - 2];
     color = [UIColor lightGrayColor];
     range = [text rangeOfString:@"RETWEETS"];
     [mas addAttributes:@{ NSForegroundColorAttributeName : color, NSFontAttributeName : regularFont } range:range];
     range = [text rangeOfString:@"FAVORITES"];
     [mas addAttributes:@{ NSForegroundColorAttributeName : color, NSFontAttributeName : regularFont } range:range];
-    
+
     self.statsLabel.attributedText = mas;
+}
+
+- (void)onComposeButton
+{
+    // TODO: add some inheritance for this since this is common code
+    // need to push the next controller on the nav stack and hide nav bar
+}
+
+- (IBAction)onReplyButton
+{
+    // TODO: bring up compose view with preloaded tweet containing author + user_mentions
+}
+
+- (IBAction)onRetweetButton
+{
+    self.retweetButton.enabled = NO;
+    if (!self.tweet.retweeted) {
+        [[TwitterClient instance] retweetWithStatusId:self.tweet.id success:^(AFHTTPRequestOperation *operation, id response) {
+            self.tweet.retweeted = YES;
+            self.retweetButton.selected = YES;
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            self.retweetButton.enabled = true;
+            [self onError:error];
+        }];
+    }
+}
+
+- (IBAction)onFavoriteButton
+{
+    self.favoriteButton.enabled = NO;
+    NSLog(@"Favorited: %d", self.tweet.favorited);
+    if (self.tweet.favorited) {
+        [[TwitterClient instance] unfavoriteWithStatusId:self.tweet.id success:^(AFHTTPRequestOperation *operation, id response) {
+            self.tweet.favorited = NO;
+            self.favoriteButton.enabled = YES;
+            self.favoriteButton.selected = NO;
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            self.favoriteButton.enabled = YES;
+            [self onError:error];
+        }];
+    } else {
+        [[TwitterClient instance] favoriteWithStatusId:self.tweet.id success:^(AFHTTPRequestOperation *operation, id response) {
+            NSLog(@"response: %@", response);
+            self.tweet.favorited = YES;
+            NSLog(@"Favorited: %d", self.tweet.favorited);
+            self.favoriteButton.enabled = YES;
+            self.favoriteButton.selected = YES;
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            self.favoriteButton.enabled = YES;
+            [self onError:error];
+        }];
+    }
+}
+
+- (void)onError:(NSError *)error
+{
+    NSLog(@"Error: %@", error);
+    [[[UIAlertView alloc] initWithTitle:@"Oops!" message:@"Couldn't access twitter, please try again!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
 }
 
 @end

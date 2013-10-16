@@ -41,7 +41,8 @@
 
 #pragma mark - Private methods
 
-- (IBAction)onSignInButton:(id)sender {
+- (IBAction)onSignInButton:(id)sender
+{
     [[TwitterClient instance] authorizeWithCallbackUrl:[NSURL URLWithString:@"cp-twitter://success"] success:^(AFOAuth1Token *accessToken, id responseObject) {
         [[TwitterClient instance] currentUserWithSuccess:^(AFHTTPRequestOperation *operation, id response) {
             NSLog(@"response: %@", response);
@@ -55,7 +56,8 @@
     }];
 }
 
-- (void)onError {
+- (void)onError
+{
     [[[UIAlertView alloc] initWithTitle:@"Oops!" message:@"Couldn't log in with Twitter, please try again!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
 }
 

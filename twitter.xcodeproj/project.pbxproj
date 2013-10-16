@@ -15,6 +15,8 @@
 		131417EA1806C22000D3B379 /* reply.png in Resources */ = {isa = PBXBuildFile; fileRef = 131417E91806C22000D3B379 /* reply.png */; };
 		131417EC1806C22700D3B379 /* retweet.png in Resources */ = {isa = PBXBuildFile; fileRef = 131417EB1806C22700D3B379 /* retweet.png */; };
 		131417EE1806C23100D3B379 /* favorite.png in Resources */ = {isa = PBXBuildFile; fileRef = 131417ED1806C23100D3B379 /* favorite.png */; };
+		13C46020180E80870097B555 /* favorited.png in Resources */ = {isa = PBXBuildFile; fileRef = 13C4601E180E80870097B555 /* favorited.png */; };
+		13C46021180E80870097B555 /* retweeted.png in Resources */ = {isa = PBXBuildFile; fileRef = 13C4601F180E80870097B555 /* retweeted.png */; };
 		42CC892C17AF4C6A00B6D34B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42CC892B17AF4C6A00B6D34B /* Foundation.framework */; };
 		42CC892E17AF4C6A00B6D34B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42CC892D17AF4C6A00B6D34B /* CoreGraphics.framework */; };
 		42CC893017AF4C6A00B6D34B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42CC892F17AF4C6A00B6D34B /* UIKit.framework */; };
@@ -58,6 +60,8 @@
 		131417E91806C22000D3B379 /* reply.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = reply.png; sourceTree = "<group>"; };
 		131417EB1806C22700D3B379 /* retweet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = retweet.png; sourceTree = "<group>"; };
 		131417ED1806C23100D3B379 /* favorite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = favorite.png; sourceTree = "<group>"; };
+		13C4601E180E80870097B555 /* favorited.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = favorited.png; sourceTree = "<group>"; };
+		13C4601F180E80870097B555 /* retweeted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = retweeted.png; sourceTree = "<group>"; };
 		42CC892817AF4C6A00B6D34B /* twitter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = twitter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		42CC892B17AF4C6A00B6D34B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		42CC892D17AF4C6A00B6D34B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -129,7 +133,9 @@
 				131417E71806BCB000D3B379 /* compose.png */,
 				131417E91806C22000D3B379 /* reply.png */,
 				131417EB1806C22700D3B379 /* retweet.png */,
+				13C4601F180E80870097B555 /* retweeted.png */,
 				131417ED1806C23100D3B379 /* favorite.png */,
+				13C4601E180E80870097B555 /* favorited.png */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -355,6 +361,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				131417EA1806C22000D3B379 /* reply.png in Resources */,
+				13C46021180E80870097B555 /* retweeted.png in Resources */,
 				131417EE1806C23100D3B379 /* favorite.png in Resources */,
 				131417EC1806C22700D3B379 /* retweet.png in Resources */,
 				1314177E1804FC4400D3B379 /* TweetViewController.xib in Resources */,
@@ -364,6 +371,7 @@
 				131417E61806BC7100D3B379 /* twitter.png in Resources */,
 				42CC893E17AF4C6B00B6D34B /* Images.xcassets in Resources */,
 				13141788180520B700D3B379 /* TweetCell.xib in Resources */,
+				13C46020180E80870097B555 /* favorited.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -12,37 +12,45 @@
 
 NSString * const UserDidLoginNotification = @"UserDidLoginNotification";
 NSString * const UserDidLogoutNotification = @"UserDidLogoutNotification";
-NSString * const kCurrentUserKey = @"kCurrentUserKey";
+
+static NSString * const kAccessTokenKey = @"kAccessTokenKey";
 
 @implementation User
 
-- (NSString *)name {
+- (NSString *)name
+{
     return [self.data valueOrNilForKeyPath:@"name"];
 }
 
-- (NSString *)screenName {
+- (NSString *)screenName
+{
     return [self.data valueOrNilForKeyPath:@"screen_name"];
 }
 
-- (NSString *)profileImageURL {
+- (NSString *)profileImageURL
+{
     return [self.data valueOrNilForKeyPath:@"profile_image_url"];
 }
 
-- (NSInteger)statusesCount {
+- (NSInteger)statusesCount
+{
     return [[self.data valueOrNilForKeyPath:@"statuses_count"] integerValue];
 }
 
-- (NSInteger)followersCount {
+- (NSInteger)followersCount
+{
     return [[self.data valueOrNilForKeyPath:@"followers_count"] integerValue];
 }
 
-- (NSInteger)friendsCount {
+- (NSInteger)friendsCount
+{
     return [[self.data valueOrNilForKeyPath:@"friends_count"] integerValue];
 }
 
 static User *_currentUser;
 
-+ (User *)currentUser {
++ (User *)currentUser
+{
     if (!_currentUser) {
         NSString *jsonString = [[NSUserDefaults standardUserDefaults] stringForKey:kCurrentUserKey];
         if (jsonString) {
@@ -53,7 +61,8 @@ static User *_currentUser;
     return _currentUser;
 }
 
-+ (void)setCurrentUser:(User *)currentUser {
++ (void)setCurrentUser:(User *)currentUser
+{
     if (currentUser) {
         [[NSUserDefaults standardUserDefaults] setObject:[currentUser JSONString] forKey:kCurrentUserKey];
     } else {

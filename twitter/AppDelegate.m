@@ -13,7 +13,7 @@
 
 @interface AppDelegate ()
 
-- (void)updateRootVC;
+- (void)updateRootViewController;
 
 @property (nonatomic, strong) SignedOutViewController *signedOutViewController;
 @property (nonatomic, strong) UINavigationController *navigationController;
@@ -29,8 +29,8 @@
 
     self.window.rootViewController = self.currentViewController;
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateRootVC) name:UserDidLoginNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateRootVC) name:UserDidLogoutNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateRootViewController) name:UserDidLoginNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateRootViewController) name:UserDidLogoutNotification object:nil];
     
 /*
     self.window.rootViewController = [[TimelineVC alloc] init];
@@ -70,7 +70,8 @@
     return YES;
 }
 
-- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
     NSNotification *notification = [NSNotification notificationWithName:kAFApplicationLaunchedWithURLNotification object:nil userInfo:[NSDictionary dictionaryWithObject:url forKey:kAFApplicationLaunchOptionsURLKey]];
     [[NSNotificationCenter defaultCenter] postNotification:notification];
     
@@ -106,7 +107,8 @@
 
 #pragma mark - Private methods
 
-- (UIViewController *)currentViewController {
+- (UIViewController *)currentViewController
+{
     if ([User currentUser]) {
         return self.navigationController;
     } else {
@@ -114,16 +116,17 @@
     }
 }
 
-- (UINavigationController *)navigationController {
+- (UINavigationController *)navigationController
+{
     if (!_navigationController) {
         TimelineViewController *timeline = [[TimelineViewController alloc] init];
         _navigationController = [[UINavigationController alloc] initWithRootViewController:timeline];
     }
-    
     return _navigationController;
 }
 
-- (SignedOutViewController *)signedOutViewController {
+- (SignedOutViewController *)signedOutViewController
+{
     if (!_signedOutViewController) {
         _signedOutViewController = [[SignedOutViewController alloc] init];
     }
@@ -131,7 +134,8 @@
     return _signedOutViewController;
 }
 
-- (void)updateRootVC {
+- (void)updateRootViewController
+{
     self.window.rootViewController = self.currentViewController;
 }
 

@@ -10,11 +10,18 @@
 
 @implementation Tweet
 
-- (NSString *)text {
+- (NSString *)id
+{
+    return [self.data valueOrNilForKeyPath:@"id_str"];
+}
+
+- (NSString *)text
+{
     return [self.data valueOrNilForKeyPath:@"text"];
 }
 
-- (NSDate *)createdAt {
+- (NSDate *)createdAt
+{
     static NSDateFormatter *formatter = nil; //cached
     if (!formatter) {
         formatter = [[NSDateFormatter alloc] init];
@@ -23,24 +30,52 @@
     return [formatter dateFromString:[self.data valueOrNilForKeyPath:@"created_at"]];
 }
 
-- (NSInteger)retweeted {
-    return [[self.data valueOrNilForKeyPath:@"retweeted"] integerValue];
-}
-
-- (NSInteger)retweetCount {
+- (NSInteger)retweetCount
+{
     return [[self.data valueOrNilForKeyPath:@"retweet_count"] integerValue];
 }
 
-- (NSInteger)favoriteCount {
+- (NSInteger)favoriteCount
+{
     return [[self.data valueOrNilForKeyPath:@"favorite_count"] integerValue];
 }
 
-- (User*)user {
+- (User*)user
+{
     NSDictionary *user = [self.data valueOrNilForKeyPath:@"user"];
     return [[User alloc] initWithDictionary:user];
 }
 
-+ (NSMutableArray *)tweetsWithArray:(NSArray *)array {
+- (void)setRetweeted:(BOOL)retweeted
+{
+    _retweeted = @(retweeted);
+}
+
+- (BOOL)retweeted
+{
+    if (_retweeted != nil) {
+        return [_retweeted boolValue];
+    } else {
+        return [[self.data valueOrNilForKeyPath:@"retweeted"] integerValue];
+    }
+}
+
+- (void)setFavorited:(BOOL)favorited
+{
+    _favorited = @(favorited);
+}
+
+- (BOOL)favorited
+{
+    if (_favorited != nil) {
+        return [_favorited boolValue];
+    } else {
+        return [[self.data valueOrNilForKeyPath:@"favorited"] integerValue];
+    }
+}
+
++ (NSMutableArray *)tweetsWithArray:(NSArray *)array
+{
     NSMutableArray *tweets = [[NSMutableArray alloc] initWithCapacity:array.count];
     for (NSDictionary *params in array) {
         [tweets addObject:[[Tweet alloc] initWithDictionary:params]];

@@ -7,8 +7,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TweetViewController">
             <connections>
+                <outlet property="favoriteButton" destination="Y27-cA-xxC" id="6e7-YT-bHf"/>
                 <outlet property="imageView" destination="C0m-RI-RLl" id="KuV-gq-3ZL"/>
                 <outlet property="nameLabel" destination="8gV-rv-SI7" id="yqZ-OE-6yq"/>
+                <outlet property="retweetButton" destination="eoU-7R-RCK" id="xsV-3B-3Eu"/>
                 <outlet property="statsLabel" destination="rcn-MY-E8C" id="xjZ-qQ-dCw"/>
                 <outlet property="timeLabel" destination="dsH-Q5-Q1Y" id="PkV-yi-cJL"/>
                 <outlet property="tweetLabel" destination="DOs-x6-Vds" id="2Pc-OP-kZG"/>
@@ -88,7 +90,7 @@
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="doFavorite" destination="-1" eventType="touchUpInside" id="inC-a5-zD8"/>
+                        <action selector="onFavoriteButton" destination="-1" eventType="touchUpInside" id="QsO-vW-lMV"/>
                     </connections>
                 </button>
                 <button opaque="NO" alpha="0.49999999999999961" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0N3-YC-gCx">
@@ -98,7 +100,7 @@
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="doReply" destination="-1" eventType="touchUpInside" id="5wa-Ox-4Ca"/>
+                        <action selector="onReplyButton" destination="-1" eventType="touchUpInside" id="0z6-W1-AHr"/>
                     </connections>
                 </button>
                 <button opaque="NO" alpha="0.49999999999999961" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eoU-7R-RCK">
@@ -108,7 +110,7 @@
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="doRetweet" destination="-1" eventType="touchUpInside" id="CHC-ra-xto"/>
+                        <action selector="onRetweetButton" destination="-1" eventType="touchUpInside" id="6Pe-JK-FnB"/>
                     </connections>
                 </button>
             </subviews>

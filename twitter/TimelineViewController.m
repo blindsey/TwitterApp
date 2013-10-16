@@ -12,8 +12,8 @@
 
 @interface TimelineViewController ()
 
-@property (nonatomic, strong) NSMutableArray *tweets; // of Tweets
-@property (nonatomic, strong) TweetViewController *tweetViewController;
+@property (strong, nonatomic) NSMutableArray *tweets; // of Tweets
+@property (strong, nonatomic) TweetViewController *tweetViewController;
 
 - (void)onSignOutButton;
 - (void)onComposeButton;
@@ -38,9 +38,9 @@
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Sign Out" style:UIBarButtonItemStylePlain target:self action:@selector(onSignOutButton)];
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"compose.png"] style:UIBarButtonItemStylePlain target:self action:@selector(onComposeButton)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"compose"] style:UIBarButtonItemStylePlain target:self action:@selector(onComposeButton)];
 
-    UIImage *image = [UIImage imageNamed:@"twitter.png"];
+    UIImage *image = [UIImage imageNamed:@"twitter"];
     UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
     [imageView setContentMode:UIViewContentModeScaleAspectFit];
     self.navigationItem.titleView = imageView;
@@ -54,6 +54,10 @@
                                        UITextAttributeFont : [UIFont boldSystemFontOfSize:20] };
     [bar setTitleTextAttributes:attributes];
 
+    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
+    [refreshControl addTarget:self action:@selector(reload) forControlEvents:UIControlEventValueChanged];
+    self.refreshControl = refreshControl;
+    [self.refreshControl beginRefreshing];
     [self reload];
 }
 
@@ -93,7 +97,8 @@
 
 #pragma mark - Table view delegate
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     
     Tweet *tweet = self.tweets[indexPath.row];
@@ -111,18 +116,24 @@
     return _tweetViewController;
 }
 
-- (void)onSignOutButton {
+- (void)onSignOutButton
+{
     [User setCurrentUser:nil];
 }
 
-- (void)onComposeButton {
+- (void)onComposeButton
+{
+    // TODO: add some inheritance for this since this is common code
+    // need to push the next controller on the nav stack and hide nav bar
 }
 
-- (void)reload {
+- (void)reload
+{
     [[TwitterClient instance] homeTimelineWithCount:20 sinceId:0 maxId:0 success:^(AFHTTPRequestOperation *operation, id response) {
         //NSLog(@"%@", response);
         self.tweets = [Tweet tweetsWithArray:response];
         [self.tableView reloadData];
+        [self.refreshControl endRefreshing];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         // Do nothing
     }];
