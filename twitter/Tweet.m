@@ -40,6 +40,11 @@
     return [[self.data valueOrNilForKeyPath:@"favorite_count"] integerValue];
 }
 
+- (NSArray *)userMentions
+{
+    return [self.data valueOrNilForKeyPath:@"user_mentions"];
+}
+
 - (User*)user
 {
     NSDictionary *user = [self.data valueOrNilForKeyPath:@"user"];

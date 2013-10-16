@@ -10,6 +10,8 @@
 #import "TweetCell.h"
 #import "TweetViewController.h"
 
+#define REUSE_IDENTIFIER @"TweetCell"
+
 @interface TimelineViewController ()
 
 @property (strong, nonatomic) NSMutableArray *tweets; // of Tweets
@@ -28,6 +30,7 @@
     self = [super initWithStyle:style];
     if (self) {
         self.title = @""; // since we don't want navigation text
+        
     }
     return self;
 }
@@ -35,6 +38,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+    UINib *nib = [UINib nibWithNibName:@"TweetCell" bundle:nil];
+    [self.tableView registerNib:nib forCellReuseIdentifier:REUSE_IDENTIFIER];
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 
@@ -83,11 +89,8 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *identifier = @"TweetCell";
-    NSArray *nib = [[NSBundle mainBundle] loadNibNamed:identifier owner:self options:nil];
-    TweetCell *cell = [nib objectAtIndex:0];
-
     Tweet *tweet = self.tweets[indexPath.row];
+    TweetCell *cell = [tableView dequeueReusableCellWithIdentifier:REUSE_IDENTIFIER forIndexPath:indexPath];
     cell.tweet = tweet;
     return cell;
 }
@@ -140,7 +143,7 @@
 - (void)reload
 {
     [[TwitterClient instance] homeTimelineWithCount:20 sinceId:0 maxId:0 success:^(AFHTTPRequestOperation *operation, id response) {
-        //NSLog(@"%@", response);
+        NSLog(@"%@", response);
         self.tweets = [Tweet tweetsWithArray:response];
         [self.tableView reloadData];
         [self.refreshControl endRefreshing];

@@ -19,6 +19,7 @@
 - (NSDate *)createdAt;
 - (NSInteger)favoriteCount;
 - (NSInteger)retweetCount;
+- (NSArray *)userMentions; // of NSDictionary
 
 - (User *)user;
 

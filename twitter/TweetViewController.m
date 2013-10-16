@@ -134,7 +134,7 @@
             self.tweet.retweeted = YES;
             self.retweetButton.selected = YES;
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            self.retweetButton.enabled = true;
+            self.retweetButton.enabled = YES;
             [self onError:error];
         }];
     }
