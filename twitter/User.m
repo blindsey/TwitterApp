@@ -13,7 +13,7 @@
 NSString * const UserDidLoginNotification = @"UserDidLoginNotification";
 NSString * const UserDidLogoutNotification = @"UserDidLogoutNotification";
 
-static NSString * const kAccessTokenKey = @"kAccessTokenKey";
+NSString * const kCurrentUserKey = @"kCurrentUserKey";
 
 @implementation User
 
