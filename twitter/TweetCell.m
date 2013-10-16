@@ -63,8 +63,6 @@
     }
     
     self.tweetLabel.text = tweet.text;
-    // TODO: autolayout?
-    // TODO: determine the correct height and return to heightForRowAtIndexPath
 }
 
 # pragma mark - Private methods

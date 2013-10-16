@@ -36,6 +36,8 @@
 {
     [super viewDidLoad];
     
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Sign Out" style:UIBarButtonItemStylePlain target:self action:@selector(onSignOutButton)];
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"compose"] style:UIBarButtonItemStylePlain target:self action:@selector(onComposeButton)];
@@ -92,7 +94,15 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 70; // TODO: this needs to be dynamic
+    Tweet *tweet = self.tweets[indexPath.row];
+    NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:tweet.text];
+    NSRange range = NSMakeRange(0, [string length]);
+    [string addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:13] range:range];
+
+    CGRect frame = [string boundingRectWithSize:CGSizeMake(241, 1000)
+                                        options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading
+                                        context:nil];
+    return frame.size.height + 35;
 }
 
 #pragma mark - Table view delegate
