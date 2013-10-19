@@ -67,6 +67,8 @@
             [string appendString:[NSString stringWithFormat:@"@%@ ", params[@"screen_name"]]];
         }
         self.textView.text = string;
+    } else {
+        self.textView.text = @"";
     }
     [self textViewDidChange:self.textView];
     [self.textView becomeFirstResponder];
@@ -93,7 +95,7 @@
     self.tweetButton.enabled = NO;
     [[TwitterClient instance] tweetWithStatus:self.textView.text inReplyToStatusId:self.tweet.id success:^(AFHTTPRequestOperation *operation, id response) {
         self.tweetButton.enabled = YES;
-        self.navigationController.navigationBar.hidden = NO;
+        self.navigationController.navigationBarHidden = NO;
         [self.navigationController popViewControllerAnimated:YES];
         [[[UIAlertView alloc] initWithTitle:@"Success" message:@"Tweeted!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
