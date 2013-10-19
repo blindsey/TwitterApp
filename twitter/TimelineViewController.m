@@ -107,7 +107,7 @@
     CGRect frame = [string boundingRectWithSize:CGSizeMake(241, 1000)
                                         options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading
                                         context:nil];
-    return frame.size.height + 35;
+    return MAX(68.0, frame.size.height + 35);
 }
 
 #pragma mark - Table view delegate
@@ -155,11 +155,12 @@
 - (void)reload
 {
     [[TwitterClient instance] homeTimelineWithCount:20 sinceId:0 maxId:0 success:^(AFHTTPRequestOperation *operation, id response) {
-        NSLog(@"%@", response);
+        //NSLog(@"%@", response);
         self.tweets = [Tweet tweetsWithArray:response];
         [self.tableView reloadData];
         [self.refreshControl endRefreshing];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"%@", error);
         // Do nothing
     }];
 }
