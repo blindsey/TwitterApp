@@ -9,6 +9,7 @@
 #import "TimelineViewController.h"
 #import "TweetCell.h"
 #import "TweetViewController.h"
+#import "ComposeViewController.h"
 
 #define REUSE_IDENTIFIER @"TweetCell"
 
@@ -16,6 +17,7 @@
 
 @property (strong, nonatomic) NSMutableArray *tweets; // of Tweets
 @property (strong, nonatomic) TweetViewController *tweetViewController;
+@property (strong, nonatomic) ComposeViewController *composeViewController;
 
 - (void)onSignOutButton;
 - (void)onComposeButton;
@@ -124,9 +126,17 @@
 - (TweetViewController *)tweetViewController
 {
     if (!_tweetViewController) {
-        _tweetViewController = [[TweetViewController alloc] initWithNibName:@"TweetViewController" bundle:nil];
+        _tweetViewController = [[TweetViewController alloc] init];
     }
     return _tweetViewController;
+}
+
+- (ComposeViewController *)composeViewController
+{
+    if (!_composeViewController) {
+        _composeViewController = [[ComposeViewController alloc] init];
+    }
+    return _composeViewController;
 }
 
 - (void)onSignOutButton
@@ -136,8 +146,10 @@
 
 - (void)onComposeButton
 {
-    // TODO: add some inheritance for this since this is common code
-    // need to push the next controller on the nav stack and hide nav bar
+    // TODO: figure out a way to reuse the ComposeViewController
+    self.composeViewController.tweet = nil;
+    self.navigationController.navigationBarHidden = YES;
+    [self.navigationController pushViewController:self.composeViewController animated:YES];
 }
 
 - (void)reload

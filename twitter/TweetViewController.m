@@ -7,6 +7,7 @@
 //
 
 #import "TweetViewController.h"
+#import "ComposeViewController.h"
 
 @interface TweetViewController ()
 
@@ -18,6 +19,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *statsLabel;
 @property (weak, nonatomic) IBOutlet UIButton *favoriteButton;
 @property (weak, nonatomic) IBOutlet UIButton *retweetButton;
+
+@property (strong, nonatomic) ComposeViewController *composeViewController;
 
 - (void)attributedStringForStatsLabel;
 
@@ -115,15 +118,26 @@
     self.statsLabel.attributedText = mas;
 }
 
+- (ComposeViewController *)composeViewController
+{
+    if (!_composeViewController) {
+        _composeViewController = [[ComposeViewController alloc] init];
+    }
+    return _composeViewController;
+}
+
 - (void)onComposeButton
 {
-    // TODO: add some inheritance for this since this is common code
-    // need to push the next controller on the nav stack and hide nav bar
+    self.composeViewController.tweet = nil;
+    self.navigationController.navigationBarHidden = YES;
+    [self.navigationController pushViewController:self.composeViewController animated:YES];
 }
 
 - (IBAction)onReplyButton
 {
-    // TODO: bring up compose view with preloaded tweet containing author + user_mentions
+    self.composeViewController.tweet = self.tweet;
+    self.navigationController.navigationBarHidden = YES;
+    [self.navigationController pushViewController:self.composeViewController animated:YES];
 }
 
 - (IBAction)onRetweetButton

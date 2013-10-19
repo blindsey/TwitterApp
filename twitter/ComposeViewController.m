@@ -26,9 +26,25 @@
 
 @implementation ComposeViewController
 
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        // Custom initialization
+    }
+    return self;
+}
+
 - (void)viewDidLoad
 {
+    [super viewDidLoad];
     self.textView.delegate = self;
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -61,14 +77,14 @@
     NSInteger length = [textView.text length];
     self.placeholderLabel.hidden = length > 0;
     self.lengthLabel.text = [NSString stringWithFormat:@"%d", 140 - length];
-    self.lengthLabel.textColor = length > 140 ? [UIColor redColor] : [UIColor lightTextColor];
+    self.lengthLabel.textColor = length > 140 ? [UIColor redColor] : [UIColor grayColor];
 }
 
 # pragma mark - Private methods
 
 - (IBAction)onCancelButton
 {
-    self.navigationController.navigationBar.hidden = NO;
+    self.navigationController.navigationBarHidden = NO;
     [self.navigationController popViewControllerAnimated:YES];
 }
 
