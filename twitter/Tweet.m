@@ -42,7 +42,8 @@
 
 - (NSArray *)userMentions
 {
-    return [self.data valueOrNilForKeyPath:@"user_mentions"];
+    NSDictionary *entities = [self.data valueOrNilForKeyPath:@"entities"];
+    return [entities valueOrNilForKeyPath:@"user_mentions"];
 }
 
 - (User*)user
